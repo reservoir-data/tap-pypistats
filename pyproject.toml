@@ -49,11 +49,11 @@ tests = [
   "pytest-httpserver>=1.1",
 ]
 
-[tool.hatch.version]
-source = "vcs"
-
 [tool.hatch.metadata.hooks.pinned_extra]
 name = "pinned"
+
+[tool.hatch.version]
+source = "vcs"
 
 [tool.uv]
 prerelease = "allow"
