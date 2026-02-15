@@ -65,6 +65,7 @@ line-length = 100
 preview = true
 
 lint.select = [
+  "B",
   "BLE",
   "C90",
   "E",

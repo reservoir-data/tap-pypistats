@@ -99,20 +99,11 @@ EXAMPLE_SYSTEM_RESPONSE = """
 def test_iter_packages(httpserver: HTTPServer):
     package_name = "package_name"
     base_url = httpserver.url_for("").strip("/")
+    system = f"/packages/{package_name}/system"
+    python_minor = f"/packages/{package_name}/python_minor"
 
-    (
-        httpserver.expect_oneshot_request(f"/packages/{package_name}/system").respond_with_data(
-            EXAMPLE_SYSTEM_RESPONSE, headers={"Content-Type": "application/json"}
-        )
-    )
-    (
-        httpserver.expect_oneshot_request(
-            f"/packages/{package_name}/python_minor"
-        ).respond_with_data(
-            EXAMPLE_PYTHON_MINOR_RESPONSE,
-            headers={"Content-Type": "application/json"},
-        )
-    )
+    httpserver.expect_oneshot_request(system).respond_with_data(EXAMPLE_SYSTEM_RESPONSE)
+    httpserver.expect_oneshot_request(python_minor).respond_with_data(EXAMPLE_PYTHON_MINOR_RESPONSE)
 
     messages = list(iter_packages(base_url, [package_name]))
     assert len(messages) == 1 + 5 + 1 + 9
