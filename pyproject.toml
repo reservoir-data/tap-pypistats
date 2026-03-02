@@ -49,21 +49,18 @@ tests = [
   "pytest-httpserver>=1.1",
 ]
 
-[tool.hatch.metadata.hooks.pinned_extra]
-name = "pinned"
-
-[tool.hatch.version]
-source = "vcs"
+[tool.hatch]
+metadata.hooks.pinned_extra.name = "pinned"
+version.source = "vcs"
 
 [tool.uv]
+required-version = ">=0.6"
 prerelease = "allow"
 preview = true
-required-version = ">=0.6"
 
 [tool.ruff]
 line-length = 100
 preview = true
-
 lint.select = [
   "B",
   "BLE",
@@ -99,10 +96,8 @@ env_list = [
   "3.11",
   "3.10",
 ]
-
-[tool.tox.env_run_base]
-description = "run unit tests"
-runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_PYPISTATS_*" ]
-dependency_groups = [ "tests" ]
-commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+env_run_base.description = "run unit tests"
+env_run_base.runner = "uv-venv-lock-runner"
+env_run_base.pass_env = [ "TAP_PYPISTATS_*" ]
+env_run_base.dependency_groups = [ "tests" ]
+env_run_base.commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
