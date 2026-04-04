@@ -38,7 +38,7 @@ dependencies = [
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-pypistats#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-pypistats"
-scripts."tap-pypistats" = "tap_pypistats.tap:main"
+scripts.tap-pypistats = "tap_pypistats.tap:main"
 
 [dependency-groups]
 dev = [
