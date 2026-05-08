@@ -10,11 +10,14 @@ import json
 import logging
 import pathlib
 import sys
-import typing as t
+from typing import IO, TYPE_CHECKING, Any
 
 import requests
 import requests.adapters
 import requests_cache
+
+if TYPE_CHECKING:
+    from collections.abc import Generator, Iterable
 
 BASE_URL = "https://pypistats.org/api"
 VERSION = importlib.metadata.version("tap-pypistats")
@@ -66,7 +69,7 @@ SCHEMA = {
 }
 
 
-def write_message(message: dict[str, t.Any], *, stream: t.IO[str] = sys.stdout) -> None:
+def write_message(message: dict[str, Any], *, stream: IO[str] = sys.stdout) -> None:
     """Write a message to a stream.
 
     :param dict message: The message to write.
@@ -82,7 +85,7 @@ def iter_python_minor(
     package_name: str,
     *,
     user_agent: str = DEFAULT_USER_AGENT,
-) -> t.Generator[dict[str, t.Any], None, None]:
+) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/python_minor"
     response = session.get(url, timeout=60, headers={"User-Agent": user_agent})
@@ -95,7 +98,7 @@ def iter_system(
     session: requests.Session,
     base_url: str,
     package_name: str,
-) -> t.Generator[dict[str, t.Any], None, None]:
+) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/system"
     response = session.get(url, timeout=60)
@@ -106,10 +109,10 @@ def iter_system(
 
 def iter_packages(
     base_url: str,
-    packages: t.Iterable[str],
+    packages: Iterable[str],
     *,
     user_agent: str = DEFAULT_USER_AGENT,
-) -> t.Generator[dict[str, t.Any], None, None]:
+) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a list of packages.
 
     :param str base_url: The base URL for the API.
@@ -160,12 +163,12 @@ def iter_packages(
 
 def sync_packages(
     base_url: str,
-    packages: t.Iterable[str],
+    packages: Iterable[str],
     *,
     cache_name: str = "pypistats",
-    stream: t.IO[str] = sys.stdout,
+    stream: IO[str] = sys.stdout,
     user_agent: str = DEFAULT_USER_AGENT,
-) -> t.Generator[dict[str, t.Any], None, None]:
+) -> None:
     """Sync data for a list of packages.
 
     :param str base_url: The base URL for the API.
@@ -186,7 +189,7 @@ def main() -> None:
     parser.add_argument(
         "-c",
         "--config",
-        help="The path to the configuration file.",
+        help="path to the configuration file",
         required=True,
         type=pathlib.Path,
     )
@@ -195,13 +198,13 @@ def main() -> None:
     try:
         config = args.get_config()
     except json.JSONDecodeError as error:
-        logger.error("Configuration file is not valid JSON: %s", error)
+        logger.error("Configuration file is not valid JSON: %s", error)  # noqa: TRY400
         sys.exit(1)
     except FileNotFoundError as error:
-        logger.error("Configuration file not found: %s", error)
+        logger.error("Configuration file not found: %s", error)  # noqa: TRY400
         sys.exit(1)
     except Exception as error:  # noqa: BLE001
-        logger.error("Error reading configuration: %s", error)
+        logger.error("Error reading configuration: %s", error)  # noqa: TRY400
         sys.exit(1)
 
     sync_packages(
