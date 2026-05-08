@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import typing as t
+from typing import TYPE_CHECKING
 
 from tap_pypistats.tap import iter_packages
 
-if t.TYPE_CHECKING:
+if TYPE_CHECKING:
     from pytest_httpserver import HTTPServer
 
 EXAMPLE_PYTHON_MINOR_RESPONSE = """
@@ -96,7 +96,7 @@ EXAMPLE_SYSTEM_RESPONSE = """
 """
 
 
-def test_iter_packages(httpserver: HTTPServer):
+def test_iter_packages(httpserver: HTTPServer) -> None:
     package_name = "package_name"
     base_url = httpserver.url_for("").strip("/")
     system = f"/packages/{package_name}/system"
