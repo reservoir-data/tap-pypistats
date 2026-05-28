@@ -36,22 +36,25 @@ dependencies = [
   "requests~=2.32",
   "requests-cache~=1.2",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-pypistats#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-pypistats"
-scripts.tap-pypistats = "tap_pypistats.tap:main"
+[project.scripts]
+tap-pypistats = "tap_pypistats.tap:main"
+[project.urls]
+Documentation = "https://github.com/edgarrmondragon/tap-pypistats#readme"
+Homepage = "https://github.com/edgarrmondragon/tap-pypistats"
 
 [dependency-groups]
 dev = [
   { include-group = "tests" },
 ]
 tests = [
-  "pytest>=8.4",
+  "pytest>=9",
   "pytest-httpserver>=1.1",
 ]
 
-[tool.hatch]
-metadata.hooks.pinned_extra.name = "pinned"
-version.source = "vcs"
+[tool.hatch.metadata.hooks.pinned_extra]
+name = "pinned"
+[tool.hatch.version]
+source = "vcs"
 
 [tool.uv]
 required-version = ">=0.6"
@@ -61,7 +64,8 @@ preview = true
 [tool.ruff]
 line-length = 100
 preview = true
-lint.select = [
+[tool.ruff.lint]
+select = [
   "ANN",
   "ARG",
   "B",
@@ -102,25 +106,22 @@ lint.select = [
   "W",
   "YTT",
 ]
-lint.per-file-ignores."tests/*" = [
+per-file-ignores."tests/*" = [
   "S101",
 ]
 
 [tool.pyproject-fmt]
 max_supported_python = "3.15"
+table_format = "long"
 
 [tool.tox]
-requires = [ "tox", "tox-uv" ]
+requires = [ "tox>=4.55", "tox-uv>=1.35" ]
 env_list = [
-  "3.15",
-  "3.14",
-  "3.13",
-  "3.12",
-  "3.11",
-  "3.10",
+  { prefix = "3.", start = 10 },
 ]
-env_run_base.description = "run unit tests"
-env_run_base.runner = "uv-venv-lock-runner"
-env_run_base.pass_env = [ "TAP_PYPISTATS_*" ]
-env_run_base.dependency_groups = [ "tests" ]
-env_run_base.commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+[tool.tox.env_run_base]
+description = "run unit tests on Python {py_dot_ver}"
+runner = "uv-venv-lock-runner"
+pass_env = [ "TAP_PYPISTATS_*" ]
+dependency_groups = [ "tests" ]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
