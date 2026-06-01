@@ -120,8 +120,8 @@ env_list = [
   { prefix = "3.", start = 10 },
 ]
 [tool.tox.env_run_base]
-description = "run unit tests on Python {py_dot_ver}"
 runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_PYPISTATS_*" ]
+description = "run unit tests on Python {py_dot_ver}"
 dependency_groups = [ "tests" ]
+pass_env = [ "TAP_PYPISTATS_*" ]
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
