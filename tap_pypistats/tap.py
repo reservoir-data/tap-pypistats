@@ -2,6 +2,15 @@
 
 from __future__ import annotations
 
+__lazy_modules__ = {
+    "datetime",
+    "json",
+    "pathlib",
+    "requests",
+    "requests.adapters",
+    "requests_cache",
+}
+
 import argparse
 import dataclasses
 import datetime
