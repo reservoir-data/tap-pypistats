@@ -35,3 +35,10 @@ repos:
         language: python
         additional_dependencies:
         - pyjson5==2.0.1
+
+  - repo: https://github.com/henryiii/flake8-lazy
+    rev: v0.8.2
+    hooks:
+      - id: flake8-lazy
+        args: ["--apply=set"]
+        files: '^tap_pypistats'
