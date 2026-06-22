@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "hatchling.build"
 requires = [
-  "hatch-pinned-extra==0.3",
+  "hatch-pinned-extra==0.4",
   "hatch-vcs",
   "hatchling",
 ]
@@ -52,6 +52,7 @@ tests = [
 ]
 
 [tool.hatch.metadata.hooks.pinned_extra]
+lockfile = "pylock.toml"
 name = "pinned"
 [tool.hatch.version]
 source = "vcs"
