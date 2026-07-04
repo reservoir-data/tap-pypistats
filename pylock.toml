@@ -2,7 +2,7 @@
 #    uv export --frozen --format=pylock.toml --output-file=pylock.toml --no-dev
 lock-version = "1.0"
 created-by = "uv"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [[packages]]
 name = "attrs"
@@ -31,22 +31,6 @@ version = "3.4.7"
 index = "https://pypi.org/simple"
 sdist = { url = "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz", upload-time = 2026-04-02T09:28:39Z, size = 144271, hashes = { sha256 = "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5" } }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/26/08/0f303cb0b529e456bb116f2d50565a482694fbb94340bf56d44677e7ed03/charset_normalizer-3.4.7-cp310-cp310-macosx_10_9_universal2.whl", upload-time = 2026-04-02T09:25:40Z, size = 315182, hashes = { sha256 = "cdd68a1fb318e290a2077696b7eb7a21a49163c455979c639bf5a5dcdc46617d" } },
-    { url = "https://files.pythonhosted.org/packages/24/47/b192933e94b546f1b1fe4df9cc1f84fcdbf2359f8d1081d46dd029b50207/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", upload-time = 2026-04-02T09:25:42Z, size = 209329, hashes = { sha256 = "e17b8d5d6a8c47c85e68ca8379def1303fd360c3e22093a807cd34a71cd082b8" } },
-    { url = "https://files.pythonhosted.org/packages/c2/b4/01fa81c5ca6141024d89a8fc15968002b71da7f825dd14113207113fabbd/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", upload-time = 2026-04-02T09:25:44Z, size = 231230, hashes = { sha256 = "511ef87c8aec0783e08ac18565a16d435372bc1ac25a91e6ac7f5ef2b0bff790" } },
-    { url = "https://files.pythonhosted.org/packages/20/f7/7b991776844dfa058017e600e6e55ff01984a063290ca5622c0b63162f68/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_s390x.manylinux_2_17_s390x.manylinux_2_28_s390x.whl", upload-time = 2026-04-02T09:25:45Z, size = 225890, hashes = { sha256 = "007d05ec7321d12a40227aae9e2bc6dca73f3cb21058999a1df9e193555a9dcc" } },
-    { url = "https://files.pythonhosted.org/packages/20/e7/bed0024a0f4ab0c8a9c64d4445f39b30c99bd1acd228291959e3de664247/charset_normalizer-3.4.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", upload-time = 2026-04-02T09:25:46Z, size = 216930, hashes = { sha256 = "cf29836da5119f3c8a8a70667b0ef5fdca3bb12f80fd06487cfa575b3909b393" } },
-    { url = "https://files.pythonhosted.org/packages/e2/ab/b18f0ab31cdd7b3ddb8bb76c4a414aeb8160c9810fdf1bc62f269a539d87/charset_normalizer-3.4.7-cp310-cp310-manylinux_2_31_armv7l.whl", upload-time = 2026-04-02T09:25:48Z, size = 202109, hashes = { sha256 = "12d8baf840cc7889b37c7c770f478adea7adce3dcb3944d02ec87508e2dcf153" } },
-    { url = "https://files.pythonhosted.org/packages/82/e5/7e9440768a06dfb3075936490cb82dbf0ee20a133bf0dd8551fa096914ec/charset_normalizer-3.4.7-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", upload-time = 2026-04-02T09:25:49Z, size = 214684, hashes = { sha256 = "d560742f3c0d62afaccf9f41fe485ed69bd7661a241f86a3ef0f0fb8b1a397af" } },
-    { url = "https://files.pythonhosted.org/packages/71/94/8c61d8da9f062fdf457c80acfa25060ec22bf1d34bbeaca4350f13bcfd07/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_aarch64.whl", upload-time = 2026-04-02T09:25:50Z, size = 212785, hashes = { sha256 = "b14b2d9dac08e28bb8046a1a0434b1750eb221c8f5b87a68f4fa11a6f97b5e34" } },
-    { url = "https://files.pythonhosted.org/packages/66/cd/6e9889c648e72c0ab2e5967528bb83508f354d706637bc7097190c874e13/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_armv7l.whl", upload-time = 2026-04-02T09:25:51Z, size = 203055, hashes = { sha256 = "bc17a677b21b3502a21f66a8cc64f5bfad4df8a0b8434d661666f8ce90ac3af1" } },
-    { url = "https://files.pythonhosted.org/packages/92/2e/7a951d6a08aefb7eb8e1b54cdfb580b1365afdd9dd484dc4bee9e5d8f258/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_ppc64le.whl", upload-time = 2026-04-02T09:25:53Z, size = 232502, hashes = { sha256 = "750e02e074872a3fad7f233b47734166440af3cdea0add3e95163110816d6752" } },
-    { url = "https://files.pythonhosted.org/packages/58/d5/abcf2d83bf8e0a1286df55cd0dc1d49af0da4282aa77e986df343e7de124/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_riscv64.whl", upload-time = 2026-04-02T09:25:54Z, size = 214295, hashes = { sha256 = "4e5163c14bffd570ef2affbfdd77bba66383890797df43dc8b4cc7d6f500bf53" } },
-    { url = "https://files.pythonhosted.org/packages/47/3a/7d4cd7ed54be99973a0dc176032cba5cb1f258082c31fa6df35cff46acfc/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_s390x.whl", upload-time = 2026-04-02T09:25:55Z, size = 227145, hashes = { sha256 = "6ed74185b2db44f41ef35fd1617c5888e59792da9bbc9190d6c7300617182616" } },
-    { url = "https://files.pythonhosted.org/packages/1d/98/3a45bf8247889cf28262ebd3d0872edff11565b2a1e3064ccb132db3fbb0/charset_normalizer-3.4.7-cp310-cp310-musllinux_1_2_x86_64.whl", upload-time = 2026-04-02T09:25:57Z, size = 218884, hashes = { sha256 = "94e1885b270625a9a828c9793b4d52a64445299baa1fea5a173bf1d3dd9a1a5a" } },
-    { url = "https://files.pythonhosted.org/packages/ad/80/2e8b7f8915ed5c9ef13aa828d82738e33888c485b65ebf744d615040c7ea/charset_normalizer-3.4.7-cp310-cp310-win32.whl", upload-time = 2026-04-02T09:25:58Z, size = 148343, hashes = { sha256 = "6785f414ae0f3c733c437e0f3929197934f526d19dfaa75e18fdb4f94c6fb374" } },
-    { url = "https://files.pythonhosted.org/packages/35/1b/3b8c8c77184af465ee9ad88b5aea46ea6b2e1f7b9dc9502891e37af21e30/charset_normalizer-3.4.7-cp310-cp310-win_amd64.whl", upload-time = 2026-04-02T09:25:59Z, size = 159174, hashes = { sha256 = "6696b7688f54f5af4462118f0bfa7c1621eeb87154f77fa04b9295ce7a8f2943" } },
-    { url = "https://files.pythonhosted.org/packages/be/c1/feb40dca40dbb21e0a908801782d9288c64fc8d8e562c2098e9994c8c21b/charset_normalizer-3.4.7-cp310-cp310-win_arm64.whl", upload-time = 2026-04-02T09:26:00Z, size = 147805, hashes = { sha256 = "66671f93accb62ed07da56613636f3641f1a12c13046ce91ffc923721f23c008" } },
     { url = "https://files.pythonhosted.org/packages/c2/d7/b5b7020a0565c2e9fa8c09f4b5fa6232feb326b8c20081ccded47ea368fd/charset_normalizer-3.4.7-cp311-cp311-macosx_10_9_universal2.whl", upload-time = 2026-04-02T09:26:02Z, size = 309705, hashes = { sha256 = "7641bb8895e77f921102f72833904dcd9901df5d6d72a2ab8f31d04b7e51e4e7" } },
     { url = "https://files.pythonhosted.org/packages/5a/53/58c29116c340e5456724ecd2fff4196d236b98f3da97b404bc5e51ac3493/charset_normalizer-3.4.7-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", upload-time = 2026-04-02T09:26:03Z, size = 206419, hashes = { sha256 = "202389074300232baeb53ae2569a60901f7efadd4245cf3a3bf0617d60b439d7" } },
     { url = "https://files.pythonhosted.org/packages/b2/02/e8146dc6591a37a00e5144c63f29fb7c97a734ea8a111190783c0e60ab63/charset_normalizer-3.4.7-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", upload-time = 2026-04-02T09:26:04Z, size = 227901, hashes = { sha256 = "30b8d1d8c52a48c2c5690e152c169b673487a2a58de1ec7393196753063fcd5e" } },
@@ -129,14 +113,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/de/32/d92444ad05c7a6e41fb2036749777c163baf7a0301a040cb672d6b2b1ae9/charset_normalizer-3.4.7-cp314-cp314t-win_arm64.whl", upload-time = 2026-04-02T09:27:51Z, size = 153018, hashes = { sha256 = "c35abb8bfff0185efac5878da64c45dafd2b37fb0383add1be155a763c1f083d" } },
     { url = "https://files.pythonhosted.org/packages/db/8f/61959034484a4a7c527811f4721e75d02d653a35afb0b6054474d8185d4c/charset_normalizer-3.4.7-py3-none-any.whl", upload-time = 2026-04-02T09:28:37Z, size = 61958, hashes = { sha256 = "3dce51d0f5e7951f8bb4900c257dad282f49190fdbebecd4ba99bcc41fef404d" } },
 ]
-
-[[packages]]
-name = "exceptiongroup"
-version = "1.3.1"
-marker = "python_full_version < '3.11'"
-index = "https://pypi.org/simple"
-sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", upload-time = 2025-11-21T23:01:54Z, size = 30371, hashes = { sha256 = "8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219" } }
-wheels = [{ url = "https://files.pythonhosted.org/packages/8a/0e/97c33bf5009bdbac74fd2beace167cab3f978feb69cc36f1ef79360d6c4e/exceptiongroup-1.3.1-py3-none-any.whl", upload-time = 2025-11-21T23:01:53Z, size = 16740, hashes = { sha256 = "a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598" } }]
 
 [[packages]]
 name = "idna"

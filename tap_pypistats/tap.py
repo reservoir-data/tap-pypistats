@@ -129,7 +129,7 @@ def iter_packages(
     :param str user_agent: The user agent to make requests
     :rtype: Iterator[dict]
     """
-    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    now = datetime.datetime.now(datetime.UTC).isoformat()
     session = requests.Session()
     session.mount("https://", requests.adapters.HTTPAdapter(max_retries=5))
 
