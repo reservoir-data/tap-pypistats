@@ -9,14 +9,14 @@ ci:
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.15
+    rev: v0.15.20
     hooks:
       - id: ruff-check
         args: [--fix, --show-fixes]
       - id: ruff-format
 
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: v2.23.0
+    rev: v2.25.1
     hooks:
       - id: pyproject-fmt
 
@@ -29,7 +29,7 @@ repos:
         args: ["--frozen", "--format=pylock.toml", "--output-file=pylock.toml", "--no-dev", "--quiet"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.37.2
+    rev: 0.37.3
     hooks:
       - id: check-github-workflows
       - id: check-meltano
@@ -39,7 +39,7 @@ repos:
         - pyjson5==2.0.1
 
   - repo: https://github.com/henryiii/flake8-lazy
-    rev: v0.8.2
+    rev: v0.8.3
     hooks:
       - id: flake8-lazy
         args: ["--apply=set"]
