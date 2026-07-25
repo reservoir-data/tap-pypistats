@@ -207,13 +207,13 @@ def main() -> None:
     try:
         config = args.get_config()
     except json.JSONDecodeError as error:
-        logger.error("Configuration file is not valid JSON: %s", error)  # noqa: TRY400
+        logger.error("Configuration file is not valid JSON: %s", error)  # ruff: ignore[error-instead-of-exception]
         sys.exit(1)
     except FileNotFoundError as error:
-        logger.error("Configuration file not found: %s", error)  # noqa: TRY400
+        logger.error("Configuration file not found: %s", error)  # ruff: ignore[error-instead-of-exception]
         sys.exit(1)
-    except Exception as error:  # noqa: BLE001
-        logger.error("Error reading configuration: %s", error)  # noqa: TRY400
+    except Exception as error:  # ruff: ignore[blind-except]
+        logger.error("Error reading configuration: %s", error)  # ruff: ignore[error-instead-of-exception]
         sys.exit(1)
 
     sync_packages(

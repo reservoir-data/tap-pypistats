@@ -107,7 +107,7 @@ select = [
   "YTT",
 ]
 per-file-ignores."tests/*" = [
-  "S101",
+  "assert",
 ]
 
 [tool.pyproject-fmt]
