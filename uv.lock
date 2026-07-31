@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 4
 requires-python = ">=3.11"
 
 [options]
@@ -323,22 +323,6 @@ dev = [
 tests = [
     { name = "pytest" },
     { name = "pytest-httpserver" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "requests", specifier = "~=2.32" },
-    { name = "requests-cache", specifier = "~=1.2" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=9" },
-    { name = "pytest-httpserver", specifier = ">=1.1" },
-]
-tests = [
-    { name = "pytest", specifier = ">=9" },
-    { name = "pytest-httpserver", specifier = ">=1.1" },
 ]
 
 [[package]]
