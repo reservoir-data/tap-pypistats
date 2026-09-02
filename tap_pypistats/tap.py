@@ -124,7 +124,11 @@ def iter_packages(
     :rtype: Iterator[dict]
     """
     now = datetime.datetime.now(datetime.UTC).isoformat()
-    client = urllib3.PoolManager(num_pools=len(packages), headers={"User-Agent": user_agent})
+    client = urllib3.PoolManager(
+        num_pools=len(packages),
+        timeout=60,
+        headers={"User-Agent": user_agent},
+    )
 
     yield {
         "type": "SCHEMA",
