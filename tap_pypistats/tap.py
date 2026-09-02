@@ -2,18 +2,12 @@
 
 from __future__ import annotations
 
-__lazy_modules__ = {
-    "datetime",
-    "json",
-    "pathlib",
-    "requests",
-    "requests.adapters",
-    "requests_cache",
-}
+__lazy_modules__ = {"datetime", "http", "json", "pathlib", "urllib3"}
 
 import argparse
 import dataclasses
 import datetime
+import http
 import importlib.metadata
 import json
 import logging
@@ -21,12 +15,10 @@ import pathlib
 import sys
 from typing import IO, TYPE_CHECKING, Any
 
-import requests
-import requests.adapters
-import requests_cache
+import urllib3
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Iterable
+    from collections.abc import Generator
 
 BASE_URL = "https://pypistats.org/api"
 VERSION = importlib.metadata.version("tap-pypistats")
@@ -89,49 +81,50 @@ def write_message(message: dict[str, Any], *, stream: IO[str] = sys.stdout) -> N
 
 
 def iter_python_minor(
-    session: requests.Session,
+    client: urllib3.PoolManager,
     base_url: str,
     package_name: str,
-    *,
-    user_agent: str = DEFAULT_USER_AGENT,
 ) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/python_minor"
-    response = session.get(url, timeout=60, headers={"User-Agent": user_agent})
-    response.raise_for_status()
+    response = client.request(http.HTTPMethod.GET, url)
+    if response.status != http.HTTPStatus.OK:
+        msg = f"Request failed: {response.reason or 'Unknown reason'}"
+        raise RuntimeError(msg)
     data = response.json()
     yield from data["data"]
 
 
 def iter_system(
-    session: requests.Session,
+    client: urllib3.PoolManager,
     base_url: str,
     package_name: str,
 ) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/system"
-    response = session.get(url, timeout=60)
-    response.raise_for_status()
+    response = client.request(http.HTTPMethod.GET, url)
+    if response.status != http.HTTPStatus.OK:
+        msg = f"Request failed: {response.reason or 'Unknown reason'}"
+        raise RuntimeError(msg)
     data = response.json()
     yield from data["data"]
 
 
 def iter_packages(
     base_url: str,
-    packages: Iterable[str],
+    packages: list[str],
     *,
     user_agent: str = DEFAULT_USER_AGENT,
 ) -> Generator[dict[str, Any], None, None]:
     """Iterate over the data for a list of packages.
 
     :param str base_url: The base URL for the API.
-    :param Iterable[str] packages: The names of the packages.
+    :param list[str] packages: The names of the packages.
     :param str user_agent: The user agent to make requests
     :rtype: Iterator[dict]
     """
     now = datetime.datetime.now(datetime.UTC).isoformat()
-    session = requests.Session()
-    session.mount("https://", requests.adapters.HTTPAdapter(max_retries=5))
+    client = urllib3.PoolManager(num_pools=len(packages), headers={"User-Agent": user_agent})
 
     yield {
         "type": "SCHEMA",
@@ -140,7 +133,7 @@ def iter_packages(
         "key_properties": ["category", "date", "package"],
     }
     for package in packages:
-        for record in iter_python_minor(session, base_url, package, user_agent=user_agent):
+        for record in iter_python_minor(client, base_url, package):
             yield {
                 "type": "RECORD",
                 "stream": "python_minor",
@@ -158,7 +151,7 @@ def iter_packages(
         "key_properties": ["category", "date", "package"],
     }
     for package in packages:
-        for record in iter_system(session, base_url, package):
+        for record in iter_system(client, base_url, package):
             yield {
                 "type": "RECORD",
                 "stream": "system",
@@ -172,22 +165,20 @@ def iter_packages(
 
 def sync_packages(
     base_url: str,
-    packages: Iterable[str],
+    packages: list[str],
     *,
-    cache_name: str = "pypistats",
     stream: IO[str] = sys.stdout,
     user_agent: str = DEFAULT_USER_AGENT,
 ) -> None:
     """Sync data for a list of packages.
 
     :param str base_url: The base URL for the API.
-    :param Iterable[str] packages: The names of the packages.
+    :param list[str] packages: The names of the packages.
     :param str cache_name: The name of the cache.
     :param IO[str] stream: The stream to write to.
     :param str user_agent: The user agent to make requests with.
     :rtype: Iterator[dict]
     """
-    requests_cache.install_cache(cache_name)
     for message in iter_packages(base_url, packages, user_agent=user_agent):
         write_message(message, stream=stream)
 

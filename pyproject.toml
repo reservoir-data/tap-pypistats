@@ -32,14 +32,13 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "requests~=2.32",
-  "requests-cache~=1.2",
+  "urllib3>=2.7",
 ]
-[project.scripts]
-tap-pypistats = "tap_pypistats.tap:main"
 [project.urls]
 Documentation = "https://github.com/edgarrmondragon/tap-pypistats#readme"
 Homepage = "https://github.com/edgarrmondragon/tap-pypistats"
+[project.scripts]
+tap-pypistats = "tap_pypistats.tap:main"
 
 [dependency-groups]
 dev = [
@@ -50,11 +49,11 @@ tests = [
   "pytest-httpserver>=1.1",
 ]
 
+[tool.hatch.version]
+source = "vcs"
 [tool.hatch.metadata.hooks.pinned_extra]
 lockfile = "pylock.toml"
 name = "pinned"
-[tool.hatch.version]
-source = "vcs"
 
 [tool.uv]
 required-version = ">=0.6"
