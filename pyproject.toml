@@ -110,8 +110,14 @@ per-file-ignores."tests/*" = [
 ]
 
 [tool.pyproject-fmt]
-max_supported_python = "3.15"
+keep_full_version = true
 table_format = "long"
+
+[tool.pytest]
+filterwarnings = [
+  "error",
+]
+minversion = "9"
 
 [tool.tox]
 requires = [ "tox>=4.55", "tox-uv>=1.35" ]
