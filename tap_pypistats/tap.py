@@ -123,7 +123,7 @@ def iter_packages(
     :param str user_agent: The user agent to make requests
     :rtype: Iterator[dict]
     """
-    now = dt.datetime.now(datetime.UTC).isoformat()
+    now = dt.datetime.now(dt.UTC).isoformat()
     client = urllib3.PoolManager(
         num_pools=len(packages),
         timeout=60,
