@@ -84,7 +84,7 @@ def iter_python_minor(
     client: urllib3.PoolManager,
     base_url: str,
     package_name: str,
-) -> Generator[dict[str, Any], None, None]:
+) -> Generator[dict[str, Any]]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/python_minor"
     response = client.request(http.HTTPMethod.GET, url)
@@ -99,7 +99,7 @@ def iter_system(
     client: urllib3.PoolManager,
     base_url: str,
     package_name: str,
-) -> Generator[dict[str, Any], None, None]:
+) -> Generator[dict[str, Any]]:
     """Iterate over the data for a package."""
     url = f"{base_url}/packages/{package_name}/system"
     response = client.request(http.HTTPMethod.GET, url)
@@ -115,7 +115,7 @@ def iter_packages(
     packages: list[str],
     *,
     user_agent: str = DEFAULT_USER_AGENT,
-) -> Generator[dict[str, Any], None, None]:
+) -> Generator[dict[str, Any]]:
     """Iterate over the data for a list of packages.
 
     :param str base_url: The base URL for the API.
