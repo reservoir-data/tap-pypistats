@@ -38,23 +38,14 @@ Homepage = "https://github.com/edgarrmondragon/tap-pypistats"
 [project.scripts]
 tap-pypistats = "tap_pypistats.tap:main"
 
-[dependency-groups]
-dev = [
-  { include-group = "tests" },
-]
-tests = [
-  "pytest>=9",
-  "pytest-httpserver>=1.1",
-]
-
 [tool.hatch.version]
 source = "vcs"
 [tool.hatch.metadata.hooks.pinned_extra]
-lockfile = "pylock.toml"
+lockfile = "uv.lock"
 name = "pinned"
 
 [tool.uv]
-required-version = ">=0.12"
+required-version = ">=0.13"
 prerelease = "allow"
 preview = true
 
@@ -120,11 +111,14 @@ minversion = "9"
 [tool.tox]
 requires = [ "tox>=4.55", "tox-uv>=1.35" ]
 env_list = [
-  { prefix = "3.", start = 11 },
+  { prefix = "3.", start = 13 },
 ]
 [tool.tox.env_run_base]
-runner = "uv-venv-lock-runner"
+runner = "uv-venv-runner"
 description = "run unit tests on Python {py_dot_ver}"
-dependency_groups = [ "tests" ]
+deps = [
+  "pytest>=9",
+  "pytest-httpserver>=1.1",
+]
 pass_env = [ "TAP_PYPISTATS_*" ]
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
