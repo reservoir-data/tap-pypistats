@@ -115,19 +115,23 @@ def iter_packages(
     packages: list[str],
     *,
     user_agent: str = DEFAULT_USER_AGENT,
+    retries: urllib3.Retry | None = None,
 ) -> Generator[dict[str, Any]]:
     """Iterate over the data for a list of packages.
 
     :param str base_url: The base URL for the API.
     :param list[str] packages: The names of the packages.
     :param str user_agent: The user agent to make requests
+    :param urllib3.Retry retries: Optional retry configuration, defaults to ``get_retries``.
     :rtype: Iterator[dict]
     """
     now = dt.datetime.now(dt.UTC).isoformat()
+    retries = retries if retries is not None else get_retries()
     client = urllib3.PoolManager(
         num_pools=len(packages),
         timeout=60,
         headers={"User-Agent": user_agent},
+        retries=retries,
     )
 
     yield {
@@ -173,6 +177,7 @@ def sync_packages(
     *,
     stream: IO[str] = sys.stdout,
     user_agent: str = DEFAULT_USER_AGENT,
+    retries: urllib3.Retry | None = None,
 ) -> None:
     """Sync data for a list of packages.
 
@@ -181,10 +186,31 @@ def sync_packages(
     :param str cache_name: The name of the cache.
     :param IO[str] stream: The stream to write to.
     :param str user_agent: The user agent to make requests with.
+    :param urllib3.Retry retries: Optional retry configuration, defaults to ``get_retries``.
     :rtype: Iterator[dict]
     """
-    for message in iter_packages(base_url, packages, user_agent=user_agent):
+    for message in iter_packages(base_url, packages, user_agent=user_agent, retries=retries):
         write_message(message, stream=stream)
+
+
+def get_retries(
+    *,
+    total: int = 5,
+    backoff_factor: int = 1,
+) -> urllib3.Retry:
+    """Get the request retrying configuration.
+
+    :param int total: Total number of retries to allow.
+    :param int backoff_factor: A backoff factor to apply between attempts after the second try.
+    :rtype: urllib3.Retry
+    """
+    return urllib3.Retry(
+        total=total,
+        backoff_factor=backoff_factor,
+        status_forcelist=[429, 500, 502, 503, 504],
+        respect_retry_after_header=True,
+        raise_on_status=False,
+    )
 
 
 def main() -> None:
